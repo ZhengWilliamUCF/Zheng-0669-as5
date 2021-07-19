@@ -24,7 +24,7 @@ public class Program extends Application {
     public void start(Stage primaryStage) {
         try {
             // locate FXMl file
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Inventory.fxml")));
             Scene scene = new Scene(root);
             // setup scene
             primaryStage.setScene(scene);
