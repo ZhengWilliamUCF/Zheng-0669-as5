@@ -130,4 +130,10 @@ public class InventoryController implements Initializable {
         }
         return true;
     }
+
+    private void RemoveItem(){
+        // gets selected index and removes it
+        int selected = myToDoTable.getSelectionModel().getSelectedIndex();
+        myToDoTable.getItems().remove(selected);
+    }
 }
