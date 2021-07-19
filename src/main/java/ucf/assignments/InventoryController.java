@@ -57,9 +57,9 @@ public class InventoryController implements Initializable {
 
     @FXML
     public void AddItemButtonClicked(ActionEvent actionEvent) {
-        System.out.println(isItemValueValid());
-        System.out.println(isItemSerialNumberValid());
-        System.out.println(isItemNameValid());
+        if (isItemValid()){
+            AddItemToTable();
+        }
     }
 
     @FXML
@@ -97,7 +97,7 @@ public class InventoryController implements Initializable {
                 return false;
             }
         }
-        return true;
+        return ItemSerialExists();
     }
 
     private boolean isItemValueValid(){
@@ -109,5 +109,25 @@ public class InventoryController implements Initializable {
         }
         // check for negative number
         return Integer.parseInt(ItemValue.getText()) > 0;
+    }
+
+    private boolean isItemValid(){
+        return isItemValueValid() && isItemSerialNumberValid() && isItemNameValid();
+    }
+
+    private boolean ItemSerialExists(){
+        // return true if serial does not exist
+        if (myToDoTable.getItems().size() == 0){
+            return true;
+        }
+        else { for (int i = 0; i < myToDoTable.getItems().size(); i++){
+                InventoryItem holder = myToDoTable.getItems().get(i);
+                if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText())){
+                    //System.out.println("Serial number already exists in table");
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
