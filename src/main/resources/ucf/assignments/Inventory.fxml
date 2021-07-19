@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<SplitPane dividerPositions="0.07050092764378478, 0.14285714285714285, 0.9332096474953617" orientation="VERTICAL" prefHeight="541.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.InventoryController">
+    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+        <Button layoutX="10.0" layoutY="5.0" mnemonicParsing="false" onAction="#ImportFileButtonClicked" prefHeight="25.0" prefWidth="90.0" text="Import..." />
+        <Button layoutX="123.0" layoutY="5.0" mnemonicParsing="false" onAction="#ExportFileButtonClicked" prefWidth="90.0" text="Export..." />
+        <Separator orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
+    </AnchorPane>
+    <AnchorPane prefHeight="32.0" prefWidth="688.0">
+        <Button fx:id="AddEventButton" layoutX="10.0" layoutY="4.0" mnemonicParsing="false" onAction="#AddItemButtonClicked" prefHeight="25.0" prefWidth="90.0" text="Add Item" />
+        <Separator orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
+        <Button fx:id="ModifyEventButton" layoutX="123.0" layoutY="4.0" mnemonicParsing="false" onAction="#EditItemButtonClicked" prefWidth="90.0" text="Modify Item" />
+      <TextField fx:id="ItemValue" layoutX="227.0" layoutY="4.0" prefHeight="25.0" prefWidth="117.0" promptText="Value" />
+      <TextField fx:id="ItemSerialNumber" layoutX="360.0" layoutY="4.0" prefHeight="25.0" prefWidth="149.0" promptText="Serial Number" />
+      <TextField fx:id="ItemName" layoutX="525.0" layoutY="4.0" promptText="Name" />
+    </AnchorPane>
+    <TableView fx:id="myToDoTable" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+            <TableColumn fx:id="InventoryItemValueColumn" prefWidth="112.0" text="Value" />
+            <TableColumn fx:id="InventoryItemSerialNumberColumn" prefWidth="111.0" text="Serial Number" />
+            <TableColumn fx:id="InventoryItemNameColumn" prefWidth="465.0" text="Item Name" />
+        </columns>
+    </TableView>
+    <AnchorPane prefHeight="34.0" prefWidth="688.0" />
+</SplitPane>
