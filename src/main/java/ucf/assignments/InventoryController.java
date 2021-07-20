@@ -19,13 +19,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.net.FileNameMap;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class InventoryController implements Initializable {
@@ -88,7 +85,7 @@ public class InventoryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        myToDoTable.getItems().add(new InventoryItem(12345, "12345abcde", "test"));
+        dataList.add(new InventoryItem(12345, "12345abcde", "test"));
         // sets column data
         InventoryItemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemValue"));
         InventoryItemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
@@ -303,7 +300,10 @@ public class InventoryController implements Initializable {
                     <tr>""");
         ObservableList<InventoryItem> list = myToDoTable.getItems();
         for (InventoryItem item: list){
-            data.append("\n\t").append("<tr>").append("\n\t\t").append("<th>").append(item.getItemValue()).append("</th>").append("\n\t\t").append("<th>").append(item.getItemSerialNumber()).append("</th>").append("\n\t\t").append("<th>").append(item.getItemName()).append("</th>").append("\n\t").append("</tr>");
+            data.append("\n\t").append("<tr>").append("\n\t\t").append("<th>")
+                    .append(item.getItemValue()).append("</th>").append("\n\t\t").append("<th>")
+                    .append(item.getItemSerialNumber()).append("</th>").append("\n\t\t").append("<th>")
+                    .append(item.getItemName()).append("</th>").append("\n\t").append("</tr>");
         }
         data.append("""
                 </table>
@@ -323,11 +323,31 @@ public class InventoryController implements Initializable {
         writer.close();
     }
 
+    private String convertDataToJSON(){
+        StringBuilder data = new StringBuilder("""
+                {
+                    "Inventory":[""");
+        ObservableList<InventoryItem> list = myToDoTable.getItems();
+        for (InventoryItem item: list){
+            // if item is last item in list or list size is only one, don't put a comma
+            if (item.getItemSerialNumber().equals(list.get(list.size() - 1).getItemSerialNumber()) || list.size() == 1){
+                data.append("\n\t").append("{\n\t\t").append("\"Value\":\"").append(item.getItemValue()).append("\",\n\t\t").append("\"Serial Number\":\"").append(item.getItemSerialNumber()).append("\",\n\t\t").append("\"Name\":\"").append(item.getItemName()).append("\"\n").append("\t}");
+            }
+            else // put a comma
+                data.append("\n\t").append("{\n\t\t").append("\"Value\":\"").append(item.getItemValue()).append("\",\n\t\t").append("\"Serial Number\":\"").append(item.getItemSerialNumber()).append("\",\n\t\t").append("\"Name\":\"").append(item.getItemName()).append("\"\n").append("\t},");
+        }
+        data.append("""
+                
+                    ]
+                }""");
+        return data.toString();
+    }
+
     private void saveFileAsJSON(File file) throws FileNotFoundException {
         // saves data to file
         PrintWriter writer;
         writer = new PrintWriter(file);
-        writer.println("test");
+        writer.println(convertDataToJSON());
         writer.close();
     }
 
@@ -381,7 +401,7 @@ public class InventoryController implements Initializable {
         // makes sure file exists before reading it
         File file = fileChooser.showOpenDialog(stage);
         if (file!=null) {
-            // call function to read data from file
+            System.out.println("Start import!");
         }
     }
 }
