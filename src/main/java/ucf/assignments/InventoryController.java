@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class InventoryController implements Initializable {
     @FXML
@@ -191,6 +192,7 @@ public class InventoryController implements Initializable {
     private boolean ItemSerialExists(){
         // return true if serial does not exist
         if (myToDoTable.getItems().size() == 0){
+            System.out.println("table is empty");
             return true;
         }
         else { for (int i = 0; i < myToDoTable.getItems().size(); i++){
@@ -215,6 +217,23 @@ public class InventoryController implements Initializable {
             if (num == 1){return false;}
             if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText())){
                 num++;
+            }
+        }
+        }
+        return true;
+    }
+
+    private boolean ItemSerialExistsWhenImporting(String serial){
+        // return true if serial does not exist
+        if (myToDoTable.getItems().size() == 0){
+            System.out.println("table is empty");
+            return true;
+        }
+        else { for (int i = 0; i < myToDoTable.getItems().size(); i++){
+            InventoryItem holder = myToDoTable.getItems().get(i);
+            if (holder.getItemSerialNumber().equals(serial)){
+                System.out.println("Serial number already exists in table");
+                return false;
             }
         }
         }
@@ -266,7 +285,9 @@ public class InventoryController implements Initializable {
         StringBuilder data = new StringBuilder();
         ObservableList<InventoryItem> list = myToDoTable.getItems();
         for (InventoryItem item : list){
-            data.append(item.getItemValue()).append("\t").append(item.getItemSerialNumber()).append("\t").append(item.getItemName()).append("\n");
+            data.append(item.getItemValue()).append("\t")
+                    .append(item.getItemSerialNumber()).append("\t")
+                    .append(item.getItemName()).append("\n");
         }
         System.out.println(data);
         return String.valueOf(data);
@@ -331,10 +352,16 @@ public class InventoryController implements Initializable {
         for (InventoryItem item: list){
             // if item is last item in list or list size is only one, don't put a comma
             if (item.getItemSerialNumber().equals(list.get(list.size() - 1).getItemSerialNumber()) || list.size() == 1){
-                data.append("\n\t").append("{\n\t\t").append("\"Value\":\"").append(item.getItemValue()).append("\",\n\t\t").append("\"Serial Number\":\"").append(item.getItemSerialNumber()).append("\",\n\t\t").append("\"Name\":\"").append(item.getItemName()).append("\"\n").append("\t}");
+                data.append("\n\t").append("{\n\t\t").append("\"Value\":\"")
+                        .append(item.getItemValue()).append("\",\n\t\t").append("\"Serial Number\":\"")
+                        .append(item.getItemSerialNumber()).append("\",\n\t\t").append("\"Name\":\"")
+                        .append(item.getItemName()).append("\"\n").append("\t}");
             }
             else // put a comma
-                data.append("\n\t").append("{\n\t\t").append("\"Value\":\"").append(item.getItemValue()).append("\",\n\t\t").append("\"Serial Number\":\"").append(item.getItemSerialNumber()).append("\",\n\t\t").append("\"Name\":\"").append(item.getItemName()).append("\"\n").append("\t},");
+                data.append("\n\t").append("{\n\t\t").append("\"Value\":\"")
+                        .append(item.getItemValue()).append("\",\n\t\t").append("\"Serial Number\":\"")
+                        .append(item.getItemSerialNumber()).append("\",\n\t\t").append("\"Name\":\"")
+                        .append(item.getItemName()).append("\"\n").append("\t},");
         }
         data.append("""
                 
@@ -414,8 +441,18 @@ public class InventoryController implements Initializable {
         }
     }
 
-    private void readFromTSV(File file){
-
+    private void readFromTSV(File file) throws FileNotFoundException {
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) {
+            String fileData = reader.nextLine();
+            // splits String data
+            String[] array = fileData.split("\t", 3);
+            // parses value
+            int value = Integer.parseInt(array[0]);
+            // adds to TableView
+            if (ItemSerialExistsWhenImporting(array[1]))
+                dataList.add(new InventoryItem(value, array[1], array[2]));
+        }
     }
 
     private void readFromHTML(File file){
