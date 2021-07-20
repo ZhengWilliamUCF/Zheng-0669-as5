@@ -60,7 +60,7 @@ public class InventoryController implements Initializable {
     private final FileChooser fileChooser = new FileChooser();
 
     @FXML
-    public void ImportFileButtonClicked(ActionEvent actionEvent) {
+    public void ImportFileButtonClicked(ActionEvent actionEvent) throws FileNotFoundException {
         OpenFileChooserImport();
     }
 
@@ -388,7 +388,7 @@ public class InventoryController implements Initializable {
         }
     }
 
-    private void OpenFileChooserImport(){
+    private void OpenFileChooserImport() throws FileNotFoundException {
         // creates new window
         Window stage = ItemSearch.getScene().getWindow();
         // set window name
@@ -402,6 +402,27 @@ public class InventoryController implements Initializable {
         File file = fileChooser.showOpenDialog(stage);
         if (file!=null) {
             System.out.println("Start import!");
+            readDataFromFile(file, getFileExtension(file));
         }
+    }
+
+    private void readDataFromFile(File file, String filetype) throws FileNotFoundException {
+        switch (filetype) {
+            case "txt" -> readFromTSV(file);
+            case "html" -> readFromHTML(file);
+            case "json" -> readFromJSON(file);
+        }
+    }
+
+    private void readFromTSV(File file){
+
+    }
+
+    private void readFromHTML(File file){
+
+    }
+
+    private void readFromJSON(File file){
+
     }
 }
