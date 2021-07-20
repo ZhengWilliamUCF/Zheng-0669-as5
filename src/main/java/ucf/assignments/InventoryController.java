@@ -21,7 +21,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.net.FileNameMap;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class InventoryController implements Initializable {
@@ -64,7 +68,7 @@ public class InventoryController implements Initializable {
     }
 
     @FXML
-    public void ExportFileButtonClicked(ActionEvent actionEvent) {
+    public void ExportFileButtonClicked(ActionEvent actionEvent) throws FileNotFoundException {
         OpenFileChooserExport();
     }
 
@@ -261,19 +265,41 @@ public class InventoryController implements Initializable {
         myToDoTable.sort();
     }
 
-    private void saveFileAsTSV(){
-
+    private String convertDataToTSV(){
+        StringBuilder data = new StringBuilder();
+        ObservableList<InventoryItem> list = myToDoTable.getItems();
+        for (InventoryItem item : list){
+            data.append(item.getItemValue()).append("\t").append(item.getItemSerialNumber()).append("\t").append(item.getItemName()).append("\n");
+        }
+        System.out.println(data);
+        return String.valueOf(data);
     }
 
-    private void saveFileAsHTML(){
-
+    private void saveFileAsTSV(File file, String data) throws FileNotFoundException {
+        // saves data to file
+        PrintWriter writer;
+        writer = new PrintWriter(file);
+        writer.println(data);
+        writer.close();
     }
 
-    private void saveFileAsJSON(){
-
+    private void saveFileAsHTML(File file) throws FileNotFoundException {
+        // saves data to file
+        PrintWriter writer;
+        writer = new PrintWriter(file);
+        writer.println("test");
+        writer.close();
     }
 
-    private void OpenFileChooserExport(){
+    private void saveFileAsJSON(File file) throws FileNotFoundException {
+        // saves data to file
+        PrintWriter writer;
+        writer = new PrintWriter(file);
+        writer.println("test");
+        writer.close();
+    }
+
+    private void OpenFileChooserExport() throws FileNotFoundException {
         // creates new window
         Window stage = ItemSearch.getScene().getWindow();
         // set window name
@@ -290,6 +316,23 @@ public class InventoryController implements Initializable {
         // checks if file exists
         if (file!=null){
             // calls function to save data to said file
+            saveDataToFile(file, getFileExtension(file), convertDataToTSV());
+        }
+    }
+
+    private String getFileExtension(File file){
+        // gets the file extension and returns it
+        String filename = file.getName();
+        String[] array = filename.split("\\.");
+        System.out.println(array[1]);
+        return array[1];
+    }
+
+    private void saveDataToFile(File file, String filetype, String data) throws FileNotFoundException {
+        switch (filetype) {
+            case "txt" -> saveFileAsTSV(file, data);
+            case "html" -> saveFileAsHTML(file);
+            case "json" -> saveFileAsJSON(file);
         }
     }
 

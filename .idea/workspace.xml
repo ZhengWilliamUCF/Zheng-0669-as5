@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Added search function and some commentd">
+    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Added filechooser functions for import and export">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" afterDir="false" />
     </list>
@@ -185,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626768415396</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added filechooser functions for import and export">
+      <created>1626769528021</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1626769528021</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -208,6 +215,7 @@
     <MESSAGE value="Added functions to modify item information" />
     <MESSAGE value="Added search function" />
     <MESSAGE value="Added search function and some commentd" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added search function and some commentd" />
+    <MESSAGE value="Added filechooser functions for import and export" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added filechooser functions for import and export" />
   </component>
 </project>
