@@ -17,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.CharConversionException;
 import java.io.Serial;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class InventoryController implements Initializable {
@@ -64,6 +65,7 @@ public class InventoryController implements Initializable {
 
     @FXML
     public void EditItemButtonClicked(ActionEvent actionEvent) {
+        modifyItemInformation();
     }
 
     @Override
@@ -72,11 +74,21 @@ public class InventoryController implements Initializable {
         InventoryItemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemValue"));
         InventoryItemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         InventoryItemSerialNumberColumn.setCellValueFactory(new PropertyValueFactory<>("itemSerialNumber"));
+
+        // only allows modification and deletion of a selected item
+        myToDoTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (myToDoTable.getSelectionModel().getSelectedIndex() >= 0) {
+                ItemIsSelected();
+            } else {
+                ItemIsUnselected();
+            }
+        });
     }
 
     private void AddItemToTable(){
         // adds new item to table view
         myToDoTable.getItems().add(new InventoryItem(Integer.parseInt(ItemValue.getText()), ItemSerialNumber.getText(), ItemName.getText()));
+        ItemIsUnselected();
     }
 
     private boolean isItemNameValid(){
@@ -100,6 +112,22 @@ public class InventoryController implements Initializable {
         return ItemSerialExists();
     }
 
+    private boolean isItemSerialNumberValidWhenEditing(){
+        // check if initial length is too long or short
+        if (ItemSerialNumber.getText().length() != 10) {
+            //System.out.println(ItemSerialNumber.getText().length());
+            return false;
+        }
+        // makes the SerialNumber into an array
+        char[] SerialArray = ItemSerialNumber.getText().toCharArray();
+        for (char c : SerialArray) {
+            if (!Character.isDigit(c) && !Character.isLetter(c)) {
+                return false;
+            }
+        }
+        return ItemSerialExistsWhenEditing();
+    }
+
     private boolean isItemValueValid(){
         try {
             Integer.parseInt(ItemValue.getText());
@@ -113,6 +141,10 @@ public class InventoryController implements Initializable {
 
     private boolean isItemValid(){
         return isItemValueValid() && isItemSerialNumberValid() && isItemNameValid();
+    }
+
+    private boolean isItemValidWhenEditing(){
+        return isItemValueValid() && isItemSerialNumberValidWhenEditing() && isItemNameValid();
     }
 
     private boolean ItemSerialExists(){
@@ -131,9 +163,61 @@ public class InventoryController implements Initializable {
         return true;
     }
 
+    private boolean ItemSerialExistsWhenEditing(){
+        int num = 0;
+        // return true if serial does not exist
+        if (myToDoTable.getItems().size() == 0){
+            return true;
+        }
+        else { for (int i = 0; i < myToDoTable.getItems().size(); i++){
+            InventoryItem holder = myToDoTable.getItems().get(i);
+            if (num == 1){return false;}
+            if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText())){
+                num++;
+            }
+        }
+        }
+        return true;
+    }
+
     private void RemoveItem(){
         // gets selected index and removes it
         int selected = myToDoTable.getSelectionModel().getSelectedIndex();
         myToDoTable.getItems().remove(selected);
+    }
+
+    private void modifyItemInformation(){
+        if (isItemValidWhenEditing()) {
+            myToDoTable.getSelectionModel().getSelectedItem().setItemValue(Integer.parseInt(ItemValue.getText()));
+            myToDoTable.getSelectionModel().getSelectedItem().setItemSerialNumber(ItemSerialNumber.getText());
+            myToDoTable.getSelectionModel().getSelectedItem().setItemName(ItemName.getText());
+            // refreshes table
+            myToDoTable.refresh();
+            // clears input fields
+            ItemIsUnselected();
+        }
+        else
+            System.out.println("cannot modify item");
+    }
+
+    private void ItemIsSelected(){
+        InventoryItem item = myToDoTable.getSelectionModel().getSelectedItem();
+        // set text fields
+        ItemValue.setText(String.valueOf(item.getItemValue()));
+        ItemSerialNumber.setText(item.getItemSerialNumber());
+        ItemName.setText(item.getItemName());
+    }
+
+    private void ItemIsUnselected(){
+        ItemValue.clear();
+        ItemSerialNumber.clear();
+        ItemName.clear();
+    }
+
+    private void SortByName(){
+        // TableView auto sorts so this function is not needed
+        InventoryItemNameColumn.setSortType(TableColumn.SortType.DESCENDING);
+        myToDoTable.getSortOrder().add(InventoryItemNameColumn);
+        myToDoTable.sort();
     }
 }
