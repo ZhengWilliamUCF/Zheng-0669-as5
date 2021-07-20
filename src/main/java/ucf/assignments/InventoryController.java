@@ -17,6 +17,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
+
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -52,11 +56,16 @@ public class InventoryController implements Initializable {
     private Button ModifyEventButton;
 
     @FXML
+    private final FileChooser fileChooser = new FileChooser();
+
+    @FXML
     public void ImportFileButtonClicked(ActionEvent actionEvent) {
+        OpenFileChooserImport();
     }
 
     @FXML
     public void ExportFileButtonClicked(ActionEvent actionEvent) {
+        OpenFileChooserExport();
     }
 
     @FXML
@@ -262,5 +271,42 @@ public class InventoryController implements Initializable {
 
     private void saveFileAsJSON(){
 
+    }
+
+    private void OpenFileChooserExport(){
+        // creates new window
+        Window stage = ItemSearch.getScene().getWindow();
+        // set window name
+        fileChooser.setTitle("Exporter");
+        // set default file name
+        fileChooser.setInitialFileName("inventory");
+        // set extensions for file
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("TSV Files", "*.txt"),
+                new FileChooser.ExtensionFilter("JSON Files", "*.json"),
+                new FileChooser.ExtensionFilter("HTML Files", "*.html"));
+        // Shows save dialog
+        File file = fileChooser.showSaveDialog(stage);
+        // checks if file exists
+        if (file!=null){
+            // calls function to save data to said file
+        }
+    }
+
+    private void OpenFileChooserImport(){
+        // creates new window
+        Window stage = ItemSearch.getScene().getWindow();
+        // set window name
+        fileChooser.setTitle("RobbinHood.exe");
+        // set extensions for file
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("TSV Files", "*.txt"),
+                new FileChooser.ExtensionFilter("JSON Files", "*.json"),
+                new FileChooser.ExtensionFilter("HTML Files", "*.html"));
+        // makes sure file exists before reading it
+        File file = fileChooser.showOpenDialog(stage);
+        if (file!=null) {
+            // call function to read data from file
+        }
     }
 }
