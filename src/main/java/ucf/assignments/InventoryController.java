@@ -275,19 +275,51 @@ public class InventoryController implements Initializable {
         return String.valueOf(data);
     }
 
-    private void saveFileAsTSV(File file, String data) throws FileNotFoundException {
+    private void saveFileAsTSV(File file) throws FileNotFoundException {
         // saves data to file
         PrintWriter writer;
         writer = new PrintWriter(file);
-        writer.println(data);
+        writer.println(convertDataToTSV());
         writer.close();
+    }
+
+    private String convertDataToHTML(){
+        StringBuilder data = new StringBuilder("""
+                <html>
+                <style>
+                table, th, td {
+                  border: 1px solid black;
+                  border-collapse: collapse;
+                }
+                </style>
+                </head>
+                <body>
+                                
+                <table>
+                    <tr>
+                        <th>Value</th>
+                        <th>Serial Number</th>
+                        <th>Name</th>
+                    <tr>""");
+        ObservableList<InventoryItem> list = myToDoTable.getItems();
+        for (InventoryItem item: list){
+            data.append("\n\t").append("<tr>").append("\n\t\t").append("<th>").append(item.getItemValue()).append("</th>").append("\n\t\t").append("<th>").append(item.getItemSerialNumber()).append("</th>").append("\n\t\t").append("<th>").append(item.getItemName()).append("</th>").append("\n\t").append("</tr>");
+        }
+        data.append("""
+                </table>
+                                
+                </body>
+                </html>
+                """);
+        return data.toString();
     }
 
     private void saveFileAsHTML(File file) throws FileNotFoundException {
         // saves data to file
+        System.out.println("now saving as html");
         PrintWriter writer;
         writer = new PrintWriter(file);
-        writer.println("test");
+        writer.println(convertDataToHTML());
         writer.close();
     }
 
@@ -316,7 +348,7 @@ public class InventoryController implements Initializable {
         // checks if file exists
         if (file!=null){
             // calls function to save data to said file
-            saveDataToFile(file, getFileExtension(file), convertDataToTSV());
+            saveDataToFile(file, getFileExtension(file));
         }
     }
 
@@ -328,9 +360,9 @@ public class InventoryController implements Initializable {
         return array[1];
     }
 
-    private void saveDataToFile(File file, String filetype, String data) throws FileNotFoundException {
+    private void saveDataToFile(File file, String filetype) throws FileNotFoundException {
         switch (filetype) {
-            case "txt" -> saveFileAsTSV(file, data);
+            case "txt" -> saveFileAsTSV(file);
             case "html" -> saveFileAsHTML(file);
             case "json" -> saveFileAsJSON(file);
         }
