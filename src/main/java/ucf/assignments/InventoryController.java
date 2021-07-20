@@ -5,6 +5,10 @@ package ucf.assignments;
  *  Copyright 2021 William Zheng
  */
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,14 +17,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.io.CharConversionException;
-import java.io.Serial;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class InventoryController implements Initializable {
+    @FXML
+    private TextField ItemSearch;
+
     @FXML
     private TextField ItemName;
 
@@ -68,8 +71,11 @@ public class InventoryController implements Initializable {
         modifyItemInformation();
     }
 
+    private final ObservableList<InventoryItem> dataList = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        myToDoTable.getItems().add(new InventoryItem(12345, "12345abcde", "test"));
         // sets column data
         InventoryItemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemValue"));
         InventoryItemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
@@ -83,11 +89,36 @@ public class InventoryController implements Initializable {
                 ItemIsUnselected();
             }
         });
+
+        FilteredList<InventoryItem> filteredData = new FilteredList<>(dataList, b -> true);
+        ItemSearch.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(InventoryItem -> {
+            // show everything if search bar is empty
+            if (newValue == null || newValue.isEmpty()) {
+                return true;
+            }
+
+            //sets everything to lowercase
+            String lowercaseFilter = newValue.toLowerCase();
+
+            if (InventoryItem.getItemSerialNumber().toLowerCase().contains(lowercaseFilter)){
+                return true; // matches serial number
+            } else return InventoryItem.getItemName().toLowerCase().contains(lowercaseFilter);
+            // matches item name
+            // return false otherwise
+        }));
+
+        // create new sortedlist
+        SortedList<InventoryItem> sortedData = new SortedList<>(filteredData);
+        // Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(myToDoTable.comparatorProperty());
+        // Add sorted (and filtered) data to the table.
+        myToDoTable.setItems(sortedData);
     }
 
     private void AddItemToTable(){
         // adds new item to table view
-        myToDoTable.getItems().add(new InventoryItem(Integer.parseInt(ItemValue.getText()), ItemSerialNumber.getText(), ItemName.getText()));
+        //myToDoTable.getItems().add(new InventoryItem(Integer.parseInt(ItemValue.getText()), ItemSerialNumber.getText(), ItemName.getText()));
+        dataList.add(new InventoryItem(Integer.parseInt(ItemValue.getText()), ItemSerialNumber.getText(), ItemName.getText()));
         ItemIsUnselected();
     }
 
@@ -219,5 +250,17 @@ public class InventoryController implements Initializable {
         InventoryItemNameColumn.setSortType(TableColumn.SortType.DESCENDING);
         myToDoTable.getSortOrder().add(InventoryItemNameColumn);
         myToDoTable.sort();
+    }
+
+    private void saveFileAsTSV(){
+
+    }
+
+    private void saveFileAsHTML(){
+
+    }
+
+    private void saveFileAsJSON(){
+
     }
 }

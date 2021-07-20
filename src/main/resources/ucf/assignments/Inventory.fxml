@@ -13,6 +13,7 @@
         <Button layoutX="10.0" layoutY="5.0" mnemonicParsing="false" onAction="#ImportFileButtonClicked" prefHeight="25.0" prefWidth="90.0" text="Import..." />
         <Button layoutX="123.0" layoutY="5.0" mnemonicParsing="false" onAction="#ExportFileButtonClicked" prefWidth="90.0" text="Export..." />
         <Separator orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
+      <TextField fx:id="ItemSearch" layoutX="227.0" layoutY="5.0" prefHeight="25.0" prefWidth="448.0" promptText="Search Item" />
     </AnchorPane>
     <AnchorPane prefHeight="32.0" prefWidth="688.0">
         <Button fx:id="AddEventButton" layoutX="10.0" layoutY="4.0" mnemonicParsing="false" onAction="#AddItemButtonClicked" prefHeight="25.0" prefWidth="90.0" text="Add Item" />
