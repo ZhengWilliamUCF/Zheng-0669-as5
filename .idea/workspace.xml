@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Formatted Json export better">
+    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Completed Json file importer. Does not import item if serial number already exists. Checks each imported item.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" afterDir="false" />
     </list>
@@ -249,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626827037736</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Completed Json file importer. Does not import item if serial number already exists. Checks each imported item.">
+      <created>1626829677082</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1626829677082</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -280,6 +287,7 @@
     <MESSAGE value="Preparation for functions that import and read files" />
     <MESSAGE value="Completed function form importing TSV, checks if Serial exists already and if it does display error, else add to table." />
     <MESSAGE value="Formatted Json export better" />
-    <option name="LAST_COMMIT_MESSAGE" value="Formatted Json export better" />
+    <MESSAGE value="Completed Json file importer. Does not import item if serial number already exists. Checks each imported item." />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed Json file importer. Does not import item if serial number already exists. Checks each imported item." />
   </component>
 </project>

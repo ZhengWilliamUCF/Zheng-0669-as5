@@ -12,7 +12,6 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -52,12 +51,6 @@ public class InventoryController implements Initializable {
     private TableColumn<InventoryItem, Integer> InventoryItemValueColumn;
 
     @FXML
-    private Button AddEventButton;
-
-    @FXML
-    private Button ModifyEventButton;
-
-    @FXML
     private final FileChooser fileChooser = new FileChooser();
 
     @FXML
@@ -86,7 +79,7 @@ public class InventoryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        dataList.add(new InventoryItem(12345, "12345abcde", "test"));
+        //dataList.add(new InventoryItem(12345, "12345abcde", "test"));
         // sets column data
         InventoryItemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemValue"));
         InventoryItemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
@@ -456,8 +449,32 @@ public class InventoryController implements Initializable {
         }
     }
 
-    private void readFromHTML(File file){
-
+    private void readFromHTML(File file) throws FileNotFoundException {
+        // counter for array
+        int counter = 0;
+        String[] array = new String[3];
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) {
+            String fileData = reader.nextLine();
+            // cleans up line
+            if (fileData.contains("\t\t<th>")) {
+                fileData = fileData
+                        .replaceAll("<th>", "")
+                        .replaceAll("</th>", "")
+                        .replaceAll("\t", "");
+                array[counter] = fileData;
+                counter++;
+                // when counter reaches 3 reset to 0
+                if (counter == 3){
+                    counter = 0;
+                    // parse value
+                    int value = Integer.parseInt(array[0]);
+                    // adds to TableView is imported item's serial number is not already in table
+                    if (ItemSerialExistsWhenImporting(array[1]))
+                        dataList.add(new InventoryItem(value, array[1], array[2]));
+                }
+            }
+        }
     }
 
     private void readFromJSON(File file) throws FileNotFoundException {
