@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Completed HTML file importer. Does not import item if serial number already exists. Adds item after 3 counters">
-      <change beforePath="$PROJECT_DIR$/build/resources/main/ucf/assignments/Inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/ucf/assignments/Inventory.fxml" afterDir="false" />
+    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Fixed RemoveItemButton Error">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ucf/assignments/Inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ucf/assignments/Inventory.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626831860681</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Fixed RemoveItemButton Error">
+      <created>1626832011676</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1626832011676</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -303,6 +312,7 @@
     <MESSAGE value="Formatted Json export better" />
     <MESSAGE value="Completed Json file importer. Does not import item if serial number already exists. Checks each imported item." />
     <MESSAGE value="Completed HTML file importer. Does not import item if serial number already exists. Adds item after 3 counters" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed HTML file importer. Does not import item if serial number already exists. Adds item after 3 counters" />
+    <MESSAGE value="Fixed RemoveItemButton Error" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed RemoveItemButton Error" />
   </component>
 </project>

@@ -5,6 +5,7 @@ package ucf.assignments;
  *  Copyright 2021 William Zheng
  */
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -12,7 +13,6 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -23,15 +23,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class InventoryController implements Initializable {
-    @FXML
-    private Button ModifyEventButton;
-
-    @FXML
-    private Button AddEventButton;
 
     @FXML
     private TextField ItemSearch;
@@ -55,7 +52,7 @@ public class InventoryController implements Initializable {
     private TableColumn<InventoryItem, String> InventoryItemNameColumn;
 
     @FXML
-    private TableColumn<InventoryItem, Integer> InventoryItemValueColumn;
+    private TableColumn<InventoryItem, String> InventoryItemValueColumn;
 
     @FXML
     private final FileChooser fileChooser = new FileChooser();
@@ -91,11 +88,22 @@ public class InventoryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //dataList.add(new InventoryItem(12345, "12345abcde", "test"));
         // sets column data
         InventoryItemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemValue"));
         InventoryItemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         InventoryItemSerialNumberColumn.setCellValueFactory(new PropertyValueFactory<>("itemSerialNumber"));
+
+        // prints out dollar symbol on item value
+        DecimalFormat currency = new DecimalFormat("$0.00");
+        InventoryItemValueColumn.setCellValueFactory(cellData -> {
+            String formattedCost = currency.format(getValue(cellData.getValue()));
+            return new SimpleStringProperty(formattedCost);
+        });
+
+        // prints out letter sin uppercase
+        //InventoryItemSerialNumberColumn.setCellValueFactory(cellData -> {
+            //return new SimpleStringProperty(setUpperCase(cellData.getValue()));
+        //});
 
         // only allows modification and deletion of a selected item
         myToDoTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -132,9 +140,13 @@ public class InventoryController implements Initializable {
     }
 
     private void AddItemToTable(){
+        // formats float
+        Float value = Float.valueOf(ItemValue.getText());
+        NumberFormat money = NumberFormat.getCurrencyInstance();
+        System.out.println(money.format(value));
         // adds new item to table view
-        dataList.add(new InventoryItem(Integer
-                .parseInt(ItemValue.getText()), ItemSerialNumber.getText(), ItemName.getText()));
+        // sets serial in format of "XXXXXXXXXX" where X can be a number or letter
+        dataList.add(new InventoryItem((ItemValue.getText()), ItemSerialNumber.getText().toUpperCase(), ItemName.getText()));
         ItemIsUnselected();
     }
 
@@ -177,13 +189,13 @@ public class InventoryController implements Initializable {
 
     private boolean isItemValueValid(){
         try {
-            Integer.parseInt(ItemValue.getText());
+            Float.parseFloat(ItemValue.getText());
         } catch (NumberFormatException | NullPointerException e){
             // checks if string is null or not entirely an integer
             return false;
         }
         // check for negative number
-        return Integer.parseInt(ItemValue.getText()) > 0;
+        return Float.parseFloat(ItemValue.getText()) > 0;
     }
 
     private boolean isItemValid(){
@@ -255,7 +267,7 @@ public class InventoryController implements Initializable {
 
     private void modifyItemInformation(){
         if (isItemValidWhenEditing()) {
-            myToDoTable.getSelectionModel().getSelectedItem().setItemValue(Integer.parseInt(ItemValue.getText()));
+            myToDoTable.getSelectionModel().getSelectedItem().setItemValue((ItemValue.getText()));
             myToDoTable.getSelectionModel().getSelectedItem().setItemSerialNumber(ItemSerialNumber.getText());
             myToDoTable.getSelectionModel().getSelectedItem().setItemName(ItemName.getText());
             // refreshes table
@@ -455,11 +467,9 @@ public class InventoryController implements Initializable {
             String fileData = reader.nextLine();
             // splits String data
             String[] array = fileData.split("\t", 3);
-            // parses value
-            int value = Integer.parseInt(array[0]);
             // adds to TableView is imported item's serial number is not already in table
             if (ItemSerialExistsWhenImporting(array[1]))
-                dataList.add(new InventoryItem(value, array[1], array[2]));
+                dataList.add(new InventoryItem(array[0], array[1], array[2]));
         }
     }
 
@@ -481,11 +491,9 @@ public class InventoryController implements Initializable {
                 // when counter reaches 3 reset to 0
                 if (counter == 3){
                     counter = 0;
-                    // parse value
-                    int value = Integer.parseInt(array[0]);
                     // adds to TableView is imported item's serial number is not already in table
                     if (ItemSerialExistsWhenImporting(array[1]))
-                        dataList.add(new InventoryItem(value, array[1], array[2]));
+                        dataList.add(new InventoryItem(array[0], array[1], array[2]));
                 }
             }
         }
@@ -504,12 +512,14 @@ public class InventoryController implements Initializable {
                         .replace("Name:", "");
                 // Splits clean string
                 String[] array = fileData.split(",", 3);
-                // parses value
-                int value = Integer.parseInt(array[0]);
                 // adds to TableView is imported item's serial number is not already in table
                 if (ItemSerialExistsWhenImporting(array[1]))
-                    dataList.add(new InventoryItem(value, array[1], array[2]));
+                    dataList.add(new InventoryItem(array[0], array[1], array[2]));
             }
         }
+    }
+
+    private double getValue(InventoryItem item){
+        return Double.parseDouble(item.getItemValue());
     }
 }

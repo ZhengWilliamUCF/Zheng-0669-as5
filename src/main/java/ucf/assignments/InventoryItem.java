@@ -6,23 +6,23 @@ package ucf.assignments;
  */
 
 public class InventoryItem {
-    private int itemValue;
+    private String itemValue;
     private String itemSerialNumber;
     private String itemName;
 
-    public InventoryItem(int itemValue, String itemSerialNumber, String itemName){
+    public InventoryItem(String itemValue, String itemSerialNumber, String itemName){
         this.itemValue = itemValue;
         this.itemSerialNumber = itemSerialNumber;
         this.itemName = itemName;
     }
 
-    public int getItemValue(){return itemValue;}
+    public String getItemValue(){return itemValue;}
 
     public String getItemSerialNumber(){return itemSerialNumber;}
 
     public String getItemName(){ return itemName;}
 
-    public void setItemValue(int itemValue){
+    public void setItemValue(String itemValue){
         this.itemValue = itemValue;
     }
 
