@@ -13,6 +13,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -214,8 +215,9 @@ public class InventoryController implements Initializable {
         }
         else { for (int i = 0; i < myToDoTable.getItems().size(); i++){
                 InventoryItem holder = myToDoTable.getItems().get(i);
-                if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText())){
+                if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText().toUpperCase())){
                     //System.out.println("Serial number already exists in table");
+                    showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
                     return false;
                 }
             }
@@ -232,7 +234,8 @@ public class InventoryController implements Initializable {
         else { for (int i = 0; i < myToDoTable.getItems().size(); i++){
             InventoryItem holder = myToDoTable.getItems().get(i);
             if (num == 1){return false;}
-            if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText())){
+            if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText().toUpperCase())){
+                showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
                 num++;
             }
         }
@@ -248,8 +251,9 @@ public class InventoryController implements Initializable {
         }
         else { for (int i = 0; i < myToDoTable.getItems().size(); i++){
             InventoryItem holder = myToDoTable.getItems().get(i);
-            if (holder.getItemSerialNumber().equals(serial)){
+            if (holder.getItemSerialNumber().equals(serial.toUpperCase())){
                 System.out.println("Serial number already exists in table");
+                showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
                 return false;
             }
         }
@@ -521,5 +525,13 @@ public class InventoryController implements Initializable {
 
     private double getValue(InventoryItem item){
         return Double.parseDouble(item.getItemValue());
+    }
+
+    private void showErrorMessageSerialNumberExists(String SN){
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        String error = "Cannot add item. The serial number " + SN + "already exists.";
+        errorAlert.setHeaderText("Error");
+        errorAlert.setContentText(error);
+        errorAlert.showAndWait();
     }
 }
