@@ -248,7 +248,9 @@ public class InventoryController implements Initializable {
     private void RemoveItem(){
         // gets selected index and removes it
         int selected = myToDoTable.getSelectionModel().getSelectedIndex();
-        dataList.remove(selected);
+        // item must be selected before removing something
+        if (selected >= 0)
+            dataList.remove(selected);
     }
 
     private void modifyItemInformation(){
