@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ucf.assignments.InventoryControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-21T23:29:23" hostname="DESKTOP-NKEJDJ2" time="0.027">
+  <properties/>
+  <testcase name="importJSON()" classname="ucf.assignments.InventoryControllerTest" time="0.027"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

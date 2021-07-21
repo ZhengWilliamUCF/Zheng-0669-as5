@@ -141,12 +141,7 @@ public class InventoryController implements Initializable {
     }
 
     private void AddItemToTable(){
-        // formats float
-        Float value = Float.valueOf(ItemValue.getText());
-        NumberFormat money = NumberFormat.getCurrencyInstance();
-        System.out.println(money.format(value));
         // adds new item to table view
-        // sets serial in format of "XXXXXXXXXX" where X can be a number or letter
         dataList.add(new InventoryItem((ItemValue.getText()), ItemSerialNumber.getText().toUpperCase(), ItemName.getText()));
         ItemIsUnselected();
     }
