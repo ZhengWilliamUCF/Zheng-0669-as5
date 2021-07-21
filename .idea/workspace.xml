@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Added error message dislay">
+    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Removed comma at the end of JSON imports via substring and if statement">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/ucf/assignments/Inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/ucf/assignments/Inventory.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,6 +54,7 @@
       <list>
         <option value="Class" />
         <option value="FxmlFile" />
+        <option value="UML Sequence" />
       </list>
     </option>
   </component>
@@ -83,6 +83,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultPlantUmlFileTemplate" value="UML Sequence" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -292,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626892336469</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Removed comma at the end of JSON imports via substring and if statement">
+      <created>1626894586825</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1626894586825</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -328,6 +336,7 @@
     <MESSAGE value="Fixed RemoveItemButton Error" />
     <MESSAGE value="Fixed ItemValue format and letters in SerialNumber set to uppercase" />
     <MESSAGE value="Added error message dislay" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added error message dislay" />
+    <MESSAGE value="Removed comma at the end of JSON imports via substring and if statement" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed comma at the end of JSON imports via substring and if statement" />
   </component>
 </project>

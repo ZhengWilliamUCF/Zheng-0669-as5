@@ -89,7 +89,6 @@ public class InventoryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        pritLast();
         // sets column data
         InventoryItemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemValue"));
         InventoryItemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
@@ -154,19 +153,24 @@ public class InventoryController implements Initializable {
 
     private boolean isItemNameValid(){
         // checks length of item name
-        return ItemName.getText().length() <= 256 && ItemName.getText().length() >= 2;
+        if (ItemName.getText().length() <= 256 && ItemName.getText().length() >= 2){
+            return true;
+        }
+        showErrorMessageInvalidNameLength();
+        return false;
     }
 
     private boolean isItemSerialNumberValid(){
         // check if initial length is too long or short
         if (ItemSerialNumber.getText().length() != 10) {
-            //System.out.println(ItemSerialNumber.getText().length());
+            showErrorMessageSerialNumberLength();
             return false;
         }
         // makes the SerialNumber into an array
         char[] SerialArray = ItemSerialNumber.getText().toCharArray();
         for (char c : SerialArray) {
             if (!Character.isDigit(c) && !Character.isLetter(c)) {
+                showErrorMessageSerialNumberInvalid();
                 return false;
             }
         }
@@ -176,13 +180,14 @@ public class InventoryController implements Initializable {
     private boolean isItemSerialNumberValidWhenEditing(){
         // check if initial length is too long or short
         if (ItemSerialNumber.getText().length() != 10) {
-            //System.out.println(ItemSerialNumber.getText().length());
+            showErrorMessageSerialNumberLength();
             return false;
         }
         // makes the SerialNumber into an array
         char[] SerialArray = ItemSerialNumber.getText().toCharArray();
         for (char c : SerialArray) {
             if (!Character.isDigit(c) && !Character.isLetter(c)) {
+                showErrorMessageSerialNumberInvalid();
                 return false;
             }
         }
@@ -194,10 +199,15 @@ public class InventoryController implements Initializable {
             Float.parseFloat(ItemValue.getText());
         } catch (NumberFormatException | NullPointerException e){
             // checks if string is null or not entirely an integer
+            showErrorMessageNullValue();
             return false;
         }
         // check for negative number
-        return Float.parseFloat(ItemValue.getText()) > 0;
+        if (Float.parseFloat(ItemValue.getText()) <= 0) {
+            showErrorMessageBadValue();
+            return false;
+        }
+        return true;
     }
 
     private boolean isItemValid(){
@@ -515,9 +525,7 @@ public class InventoryController implements Initializable {
                         .replace("SerialNumber:", "")
                         .replace("Name:", "");
                 // removes last character if it is ","
-                if (fileData.charAt(fileData.length()-1) == ','){
-                    fileData = fileData.substring(0, fileData.length()-1);
-                }
+                fileData = removeLastCharacter(fileData);
                 // Splits clean string
                 String[] array = fileData.split(",", 3);
                 // adds to TableView is imported item's serial number is not already in table
@@ -539,9 +547,51 @@ public class InventoryController implements Initializable {
         errorAlert.showAndWait();
     }
 
-    private void pritLast(){
-        String message = "12345,ABCDE12346,test1,";
-        char last = message.charAt(message.length()-1);
-        System.out.println(last);
+    private void showErrorMessageSerialNumberLength(){
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        String error = "Cannot add item. The serial number must be in the format XXXXXXXXXX.";
+        errorAlert.setHeaderText("Error");
+        errorAlert.setContentText(error);
+        errorAlert.showAndWait();
+    }
+
+    private void showErrorMessageSerialNumberInvalid(){
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        String error = "Cannot add item. The serial number must contain only letters or digits.";
+        errorAlert.setHeaderText("Error");
+        errorAlert.setContentText(error);
+        errorAlert.showAndWait();
+    }
+
+    private void showErrorMessageBadValue(){
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        String error = "Cannot add item. The value must be greater than $0.00.";
+        errorAlert.setHeaderText("Error");
+        errorAlert.setContentText(error);
+        errorAlert.showAndWait();
+    }
+
+
+    private void showErrorMessageNullValue() {
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        String error = "Cannot add item. The value must be a valid number.";
+        errorAlert.setHeaderText("Error");
+        errorAlert.setContentText(error);
+        errorAlert.showAndWait();
+    }
+
+    private void showErrorMessageInvalidNameLength(){
+        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+        String error = "Cannot add item. The name must be between 2 and 256 characters in length.";
+        errorAlert.setHeaderText("Error");
+        errorAlert.setContentText(error);
+        errorAlert.showAndWait();
+    }
+
+    private String removeLastCharacter(String fileData){
+        if (fileData.charAt(fileData.length()-1) == ','){
+            fileData = fileData.substring(0, fileData.length()-1);
+        }
+        return fileData;
     }
 }

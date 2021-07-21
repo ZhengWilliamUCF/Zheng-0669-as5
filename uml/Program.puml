@@ -1,0 +1,97 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class MainProgram{
+    main()
+    start()
+}
+
+class InventoryItem{
+    itemValue: String
+    itemSerialNumber: String
+    itemName: String
+
+    InventoryItem(itemValue, itemSerialNumber, itemName)
+
+    getItemValue()
+    getItemSerialNumber()
+    getItemName()
+    setItemValue(String itemValue)
+    setItemSerialNumber(String itemSerialNumber)
+    setItemName(String itemName)
+}
+
+class InventoryItemController{
+    ItemSearch: TextField
+    ItemName: TextField
+    ItemSerialNumber: TextField
+    ItemValue: TextField
+    myToDoTable: TableView<InventoryItem>
+    InventoryItemSerialNumberColumn: TableColumn<InventoryItem, String>
+    InventoryItemNameColumn: TableColumn<InventoryItem, String>
+    InventoryItemValueColumn: TableColumn<InventoryItem, String>
+    fileChooser: FileChooser
+
+    ImportFileButtonClicked()
+    ExportFileButtonClicked()
+    AddItemButtonClicked()
+    DeleteItemButtonClicked()
+    EditItemButtonClicked()
+
+    dataList: ObservableList<InventoryItem>
+
+    initialize()
+
+    AddItemToTable()
+    isItemNameValid()
+    isItemSerialNumberValid()
+    isItemSerialNumberValidWhenEditing()
+    isItemValueValid()
+    isItemValid()
+    isItemValidWhenEditing()
+    ItemSerialExists()
+    ItemSerialExistsWhenEditing()
+    ItemSerialExistsWhenImporting(String serial)
+    RemoveItem()
+    modifyItemInformation()
+    ItemIsSelected()
+    ItemIsUnselected()
+    SortByName()
+
+    convertDataToTSV()
+    saveFileAsTSV(File file)
+
+    convertDataToHTML()
+    saveFileAsHTML(File file)
+
+    convertDataToJSON()
+    saveFileAsJSON(File file)
+
+    OpenFileChooserExport()
+    getFileExtension(File file)
+    saveDataToFile(File file, String filetype)
+
+    OpenFileChooserImport()
+    readDataFromFile(File file, String filetype)
+
+    readFromTSV(File file)
+    readFromHTML(File file)
+    readFromJSON(File file)
+
+    getValue(InventoryItem item)
+
+    showErrorMessageSerialNumberExists(String SN)
+    showErrorMessageSerialNumberLength()
+    showErrorMessageSerialNumberInvalid()
+    showErrorMessageBadValue()
+    showErrorMessageNullValue()
+    showErrorMessageInvalidNameLength()
+
+    removeLastCharacter(String fileData)
+}
+
+javafx.InventoryController <-- MainProgram
+MainProgram --> InventoryItemController
+InventoryItem --> InventoryItemController
+
+@enduml
