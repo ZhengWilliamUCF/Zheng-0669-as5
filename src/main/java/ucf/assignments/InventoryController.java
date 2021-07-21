@@ -351,23 +351,21 @@ public class InventoryController implements Initializable {
                     "Inventory":[""");
         ObservableList<InventoryItem> list = myToDoTable.getItems();
         for (InventoryItem item: list){
-            // if item is last item in list or list size is only one, don't put a comma
             if (item.getItemSerialNumber().equals(list.get(list.size() - 1).getItemSerialNumber()) || list.size() == 1){
-                data.append("\n\t").append("{")
+                data.append("\n\t\t").append("{")
                         .append("\"Value\":\"").append(item.getItemValue()).append("\",")
-                        .append("\"Serial Number\":\"").append(item.getItemSerialNumber()).append("\",")
+                        .append("\"SerialNumber\":\"").append(item.getItemSerialNumber()).append("\",")
                         .append("\"Name\":\"").append(item.getItemName()).append("\"")
-                        .append("}");
+                        .append("}\n"); // if item is last item in list or list size is only one, don't put a comma
             }
-            else // put a comma
-                data.append("\n\t").append("{")
+            else
+                data.append("\n\t\t").append("{")
                         .append("\"Value\":\"").append(item.getItemValue()).append("\",")
-                        .append("\"Serial Number\":\"").append(item.getItemSerialNumber()).append("\",")
+                        .append("\"SerialNumber\":\"").append(item.getItemSerialNumber()).append("\",")
                         .append("\"Name\":\"").append(item.getItemName()).append("\"")
-                        .append("},");
+                        .append("},"); // put a comma
         }
         data.append("""
-                
                     ]
                 }""");
         return data.toString();
@@ -462,7 +460,25 @@ public class InventoryController implements Initializable {
 
     }
 
-    private void readFromJSON(File file){
-
+    private void readFromJSON(File file) throws FileNotFoundException {
+        Scanner reader = new Scanner(file);
+        while (reader.hasNext()) {
+            String fileData = reader.nextLine();
+            // cleans up line
+            if (fileData.contains("Value")) {
+                fileData = fileData.replaceAll("[{}\t\"]", "");
+                fileData = fileData
+                        .replaceAll("Value:", "")
+                        .replace("SerialNumber:", "")
+                        .replace("Name:", "");
+                // Splits clean string
+                String[] array = fileData.split(",", 3);
+                // parses value
+                int value = Integer.parseInt(array[0]);
+                // adds to TableView is imported item's serial number is not already in table
+                if (ItemSerialExistsWhenImporting(array[1]))
+                    dataList.add(new InventoryItem(value, array[1], array[2]));
+            }
+        }
     }
 }
