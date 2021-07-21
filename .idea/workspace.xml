@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Preparation for functions that import and read files">
+    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Completed function form importing TSV, checks if Serial exists already and if it does display error, else add to table.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" afterDir="false" />
     </list>
@@ -235,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626821777526</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Completed function form importing TSV, checks if Serial exists already and if it does display error, else add to table.">
+      <created>1626823778104</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1626823778104</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -264,6 +271,7 @@
     <MESSAGE value="Add function for exporting as HTML" />
     <MESSAGE value="Finished fucntions for export as JSON and HTML" />
     <MESSAGE value="Preparation for functions that import and read files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Preparation for functions that import and read files" />
+    <MESSAGE value="Completed function form importing TSV, checks if Serial exists already and if it does display error, else add to table." />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed function form importing TSV, checks if Serial exists already and if it does display error, else add to table." />
   </component>
 </project>

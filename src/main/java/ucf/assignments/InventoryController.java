@@ -327,6 +327,7 @@ public class InventoryController implements Initializable {
                     .append(item.getItemName()).append("</th>").append("\n\t").append("</tr>");
         }
         data.append("""
+                
                 </table>
                                 
                 </body>
@@ -352,16 +353,18 @@ public class InventoryController implements Initializable {
         for (InventoryItem item: list){
             // if item is last item in list or list size is only one, don't put a comma
             if (item.getItemSerialNumber().equals(list.get(list.size() - 1).getItemSerialNumber()) || list.size() == 1){
-                data.append("\n\t").append("{\n\t\t").append("\"Value\":\"")
-                        .append(item.getItemValue()).append("\",\n\t\t").append("\"Serial Number\":\"")
-                        .append(item.getItemSerialNumber()).append("\",\n\t\t").append("\"Name\":\"")
-                        .append(item.getItemName()).append("\"\n").append("\t}");
+                data.append("\n\t").append("{")
+                        .append("\"Value\":\"").append(item.getItemValue()).append("\",")
+                        .append("\"Serial Number\":\"").append(item.getItemSerialNumber()).append("\",")
+                        .append("\"Name\":\"").append(item.getItemName()).append("\"")
+                        .append("}");
             }
             else // put a comma
-                data.append("\n\t").append("{\n\t\t").append("\"Value\":\"")
-                        .append(item.getItemValue()).append("\",\n\t\t").append("\"Serial Number\":\"")
-                        .append(item.getItemSerialNumber()).append("\",\n\t\t").append("\"Name\":\"")
-                        .append(item.getItemName()).append("\"\n").append("\t},");
+                data.append("\n\t").append("{")
+                        .append("\"Value\":\"").append(item.getItemValue()).append("\",")
+                        .append("\"Serial Number\":\"").append(item.getItemSerialNumber()).append("\",")
+                        .append("\"Name\":\"").append(item.getItemName()).append("\"")
+                        .append("},");
         }
         data.append("""
                 
@@ -449,7 +452,7 @@ public class InventoryController implements Initializable {
             String[] array = fileData.split("\t", 3);
             // parses value
             int value = Integer.parseInt(array[0]);
-            // adds to TableView
+            // adds to TableView is imported item's serial number is not already in table
             if (ItemSerialExistsWhenImporting(array[1]))
                 dataList.add(new InventoryItem(value, array[1], array[2]));
         }
