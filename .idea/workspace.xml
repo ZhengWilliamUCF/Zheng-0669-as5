@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Created puml file">
+    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Created readme.md file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +54,7 @@
         <option value="Class" />
         <option value="FxmlFile" />
         <option value="UML Sequence" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -86,6 +87,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
@@ -93,8 +96,56 @@
       <recent name="C:\Users\Rando\IdeaProjects\untitled27\src\main\java\ucf\assignments" />
       <recent name="C:\Users\Rando\IdeaProjects\untitled27" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ucf.assignments" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.untitled27 [run]">
+  <component name="RunManager" selected="Gradle.InventoryItemTest">
+    <configuration name="InventoryItemTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;ucf.assignments.InventoryItemTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="InventoryItemTest.getItemValue" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;ucf.assignments.InventoryItemTest.getItemValue&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="untitled27 [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -139,6 +190,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.InventoryItemTest" />
+        <item itemvalue="Gradle.InventoryItemTest.getItemValue" />
         <item itemvalue="Gradle.untitled27 [run]" />
         <item itemvalue="Gradle.untitled27 [build]" />
       </list>
@@ -307,7 +360,21 @@
       <option name="project" value="LOCAL" />
       <updated>1626896731578</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Created readme.md file">
+      <created>1626899900488</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1626899900488</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Created readme.md file">
+      <created>1626899907023</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1626899907023</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -345,6 +412,7 @@
     <MESSAGE value="Added error message dislay" />
     <MESSAGE value="Removed comma at the end of JSON imports via substring and if statement" />
     <MESSAGE value="Created puml file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created puml file" />
+    <MESSAGE value="Created readme.md file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created readme.md file" />
   </component>
 </project>
