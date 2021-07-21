@@ -89,6 +89,7 @@ public class InventoryController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        pritLast();
         // sets column data
         InventoryItemValueColumn.setCellValueFactory(new PropertyValueFactory<>("itemValue"));
         InventoryItemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
@@ -226,19 +227,18 @@ public class InventoryController implements Initializable {
     }
 
     private boolean ItemSerialExistsWhenEditing(){
-        int num = 0;
         // return true if serial does not exist
         if (myToDoTable.getItems().size() == 0){
             return true;
         }
-        else { for (int i = 0; i < myToDoTable.getItems().size(); i++){
-            InventoryItem holder = myToDoTable.getItems().get(i);
-            if (num == 1){return false;}
-            if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText().toUpperCase())){
-                showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
-                num++;
+        else {
+            for (int i = 0; i < myToDoTable.getItems().size(); i++){
+                InventoryItem holder = myToDoTable.getItems().get(i);
+                if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText().toUpperCase())){
+                    showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
+                    return false;
+                }
             }
-        }
         }
         return true;
     }
@@ -514,6 +514,10 @@ public class InventoryController implements Initializable {
                         .replaceAll("Value:", "")
                         .replace("SerialNumber:", "")
                         .replace("Name:", "");
+                // removes last character if it is ","
+                if (fileData.charAt(fileData.length()-1) == ','){
+                    fileData = fileData.substring(0, fileData.length()-1);
+                }
                 // Splits clean string
                 String[] array = fileData.split(",", 3);
                 // adds to TableView is imported item's serial number is not already in table
@@ -529,9 +533,15 @@ public class InventoryController implements Initializable {
 
     private void showErrorMessageSerialNumberExists(String SN){
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        String error = "Cannot add item. The serial number " + SN + "already exists.";
+        String error = "Cannot add item. The serial number " + SN + " already exists.";
         errorAlert.setHeaderText("Error");
         errorAlert.setContentText(error);
         errorAlert.showAndWait();
+    }
+
+    private void pritLast(){
+        String message = "12345,ABCDE12346,test1,";
+        char last = message.charAt(message.length()-1);
+        System.out.println(last);
     }
 }
