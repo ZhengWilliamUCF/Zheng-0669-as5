@@ -12,6 +12,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,6 +27,12 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class InventoryController implements Initializable {
+    @FXML
+    private Button ModifyEventButton;
+
+    @FXML
+    private Button AddEventButton;
+
     @FXML
     private TextField ItemSearch;
 
@@ -68,6 +75,11 @@ public class InventoryController implements Initializable {
         if (isItemValid()){
             AddItemToTable();
         }
+    }
+
+    @FXML
+    public void DeleteItemButtonClicked(ActionEvent actionEvent) {
+        RemoveItem();
     }
 
     @FXML
@@ -121,8 +133,8 @@ public class InventoryController implements Initializable {
 
     private void AddItemToTable(){
         // adds new item to table view
-        //myToDoTable.getItems().add(new InventoryItem(Integer.parseInt(ItemValue.getText()), ItemSerialNumber.getText(), ItemName.getText()));
-        dataList.add(new InventoryItem(Integer.parseInt(ItemValue.getText()), ItemSerialNumber.getText(), ItemName.getText()));
+        dataList.add(new InventoryItem(Integer
+                .parseInt(ItemValue.getText()), ItemSerialNumber.getText(), ItemName.getText()));
         ItemIsUnselected();
     }
 
@@ -236,7 +248,7 @@ public class InventoryController implements Initializable {
     private void RemoveItem(){
         // gets selected index and removes it
         int selected = myToDoTable.getSelectionModel().getSelectedIndex();
-        myToDoTable.getItems().remove(selected);
+        dataList.remove(selected);
     }
 
     private void modifyItemInformation(){

@@ -13,13 +13,13 @@
         <Button layoutX="10.0" layoutY="5.0" mnemonicParsing="false" onAction="#ImportFileButtonClicked" prefHeight="25.0" prefWidth="90.0" text="Import..." />
         <Button layoutX="123.0" layoutY="5.0" mnemonicParsing="false" onAction="#ExportFileButtonClicked" prefWidth="90.0" text="Export..." />
         <Separator orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
-      <TextField fx:id="ItemSearch" layoutX="227.0" layoutY="5.0" prefHeight="25.0" prefWidth="448.0" promptText="Search Item" />
+      <TextField fx:id="ItemSearch" layoutX="232.0" layoutY="5.0" prefHeight="25.0" prefWidth="443.0" promptText="Search Item" />
     </AnchorPane>
     <AnchorPane prefHeight="32.0" prefWidth="688.0">
         <Button fx:id="AddEventButton" layoutX="10.0" layoutY="4.0" mnemonicParsing="false" onAction="#AddItemButtonClicked" prefHeight="25.0" prefWidth="90.0" text="Add Item" />
         <Separator orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="0.0" />
         <Button fx:id="ModifyEventButton" layoutX="123.0" layoutY="4.0" mnemonicParsing="false" onAction="#EditItemButtonClicked" prefWidth="90.0" text="Modify Item" />
-      <TextField fx:id="ItemValue" layoutX="227.0" layoutY="4.0" prefHeight="25.0" prefWidth="117.0" promptText="Value" />
+      <TextField fx:id="ItemValue" layoutX="232.0" layoutY="4.0" prefHeight="25.0" prefWidth="112.0" promptText="Value" />
       <TextField fx:id="ItemSerialNumber" layoutX="360.0" layoutY="4.0" prefHeight="25.0" prefWidth="149.0" promptText="Serial Number" />
       <TextField fx:id="ItemName" layoutX="525.0" layoutY="4.0" promptText="Name" />
     </AnchorPane>
@@ -30,5 +30,8 @@
             <TableColumn fx:id="InventoryItemNameColumn" prefWidth="465.0" text="Item Name" />
         </columns>
     </TableView>
-    <AnchorPane prefHeight="34.0" prefWidth="688.0" />
+    <AnchorPane prefHeight="34.0" prefWidth="688.0">
+      <children>
+         <Button layoutX="14.0" layoutY="4.0" mnemonicParsing="false" onAction="#DeleteItemButtonClicked" prefHeight="25.0" prefWidth="90.0" text="Delete Item" />
+      </children></AnchorPane>
 </SplitPane>
