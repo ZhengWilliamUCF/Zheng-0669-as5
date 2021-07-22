@@ -13,7 +13,6 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,7 +24,6 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
 public class InventoryController implements Initializable {
 
@@ -145,31 +143,29 @@ public class InventoryController implements Initializable {
         ItemIsUnselected();
     }
 
-    private void AddItemToTable2(){
-
-
-    }
-
     private boolean isItemNameValid(){
+        ErrorMessageController App = new ErrorMessageController();
         // checks length of item name
         if (ItemName.getText().length() <= 256 && ItemName.getText().length() >= 2){
             return true;
         }
-        showErrorMessageInvalidNameLength();
+        App.showErrorMessageInvalidNameLength();
         return false;
     }
 
     private boolean isItemSerialNumberValid(){
         // check if initial length is too long or short
         if (ItemSerialNumber.getText().length() != 10) {
-            showErrorMessageSerialNumberLength();
+            ErrorMessageController App = new ErrorMessageController();
+            App.showErrorMessageSerialNumberLength();
             return false;
         }
         // makes the SerialNumber into an array
         char[] SerialArray = ItemSerialNumber.getText().toCharArray();
         for (char c : SerialArray) {
             if (!Character.isDigit(c) && !Character.isLetter(c)) {
-                showErrorMessageSerialNumberInvalid();
+                ErrorMessageController App = new ErrorMessageController();
+                App.showErrorMessageSerialNumberInvalid();
                 return false;
             }
         }
@@ -179,14 +175,16 @@ public class InventoryController implements Initializable {
     private boolean isItemSerialNumberValidWhenEditing(){
         // check if initial length is too long or short
         if (ItemSerialNumber.getText().length() != 10) {
-            showErrorMessageSerialNumberLength();
+            ErrorMessageController App = new ErrorMessageController();
+            App.showErrorMessageSerialNumberLength();
             return false;
         }
         // makes the SerialNumber into an array
         char[] SerialArray = ItemSerialNumber.getText().toCharArray();
         for (char c : SerialArray) {
             if (!Character.isDigit(c) && !Character.isLetter(c)) {
-                showErrorMessageSerialNumberInvalid();
+                ErrorMessageController App = new ErrorMessageController();
+                App.showErrorMessageSerialNumberInvalid();
                 return false;
             }
         }
@@ -198,12 +196,14 @@ public class InventoryController implements Initializable {
             Float.parseFloat(ItemValue.getText());
         } catch (NumberFormatException | NullPointerException e){
             // checks if string is null or not entirely an integer
-            showErrorMessageNullValue();
+            ErrorMessageController App = new ErrorMessageController();
+            App.showErrorMessageNullValue();
             return false;
         }
         // check for negative number
         if (Float.parseFloat(ItemValue.getText()) <= 0) {
-            showErrorMessageBadValue();
+            ErrorMessageController App = new ErrorMessageController();
+            App.showErrorMessageBadValue();
             return false;
         }
         return true;
@@ -226,8 +226,9 @@ public class InventoryController implements Initializable {
         else { for (int i = 0; i < myToDoTable.getItems().size(); i++){
                 InventoryItem holder = myToDoTable.getItems().get(i);
                 if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText().toUpperCase())){
+                    ErrorMessageController App = new ErrorMessageController();
                     //System.out.println("Serial number already exists in table");
-                    showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
+                    App.showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
                     return false;
                 }
             }
@@ -244,28 +245,11 @@ public class InventoryController implements Initializable {
             for (int i = 0; i < myToDoTable.getItems().size(); i++){
                 InventoryItem holder = myToDoTable.getItems().get(i);
                 if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText().toUpperCase())){
-                    showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
+                    ErrorMessageController App = new ErrorMessageController();
+                    App.showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
                     return false;
                 }
             }
-        }
-        return true;
-    }
-
-    private boolean ItemSerialExistsWhenImporting(String serial){
-        // return true if serial does not exist
-        if (myToDoTable.getItems().size() == 0){
-            System.out.println("table is empty");
-            return true;
-        }
-        else { for (int i = 0; i < myToDoTable.getItems().size(); i++){
-            InventoryItem holder = myToDoTable.getItems().get(i);
-            if (holder.getItemSerialNumber().equals(serial.toUpperCase())){
-                System.out.println("Serial number already exists in table");
-                showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
-                return false;
-            }
-        }
         }
         return true;
     }
@@ -304,13 +288,6 @@ public class InventoryController implements Initializable {
         ItemValue.clear();
         ItemSerialNumber.clear();
         ItemName.clear();
-    }
-
-    private void SortByName(){
-        // TableView auto sorts so this function is not needed
-        InventoryItemNameColumn.setSortType(TableColumn.SortType.DESCENDING);
-        myToDoTable.getSortOrder().add(InventoryItemNameColumn);
-        myToDoTable.sort();
     }
 
     private void OpenFileChooserExport() throws FileNotFoundException {
@@ -359,54 +336,5 @@ public class InventoryController implements Initializable {
 
     private double getValue(InventoryItem item){
         return Double.parseDouble(item.getItemValue());
-    }
-
-    public void showErrorMessageSerialNumberExists(String SN){
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        String error = "Cannot add item. The serial number " + SN + " already exists.";
-        errorAlert.setHeaderText("Error");
-        errorAlert.setContentText(error);
-        errorAlert.showAndWait();
-    }
-
-    private void showErrorMessageSerialNumberLength(){
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        String error = "Cannot add item. The serial number must be in the format XXXXXXXXXX.";
-        errorAlert.setHeaderText("Error");
-        errorAlert.setContentText(error);
-        errorAlert.showAndWait();
-    }
-
-    private void showErrorMessageSerialNumberInvalid(){
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        String error = "Cannot add item. The serial number must contain only letters or digits.";
-        errorAlert.setHeaderText("Error");
-        errorAlert.setContentText(error);
-        errorAlert.showAndWait();
-    }
-
-    private void showErrorMessageBadValue(){
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        String error = "Cannot add item. The value must be greater than $0.00.";
-        errorAlert.setHeaderText("Error");
-        errorAlert.setContentText(error);
-        errorAlert.showAndWait();
-    }
-
-
-    private void showErrorMessageNullValue() {
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        String error = "Cannot add item. The value must be a valid number.";
-        errorAlert.setHeaderText("Error");
-        errorAlert.setContentText(error);
-        errorAlert.showAndWait();
-    }
-
-    private void showErrorMessageInvalidNameLength(){
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        String error = "Cannot add item. The name must be between 2 and 256 characters in length.";
-        errorAlert.setHeaderText("Error");
-        errorAlert.setContentText(error);
-        errorAlert.showAndWait();
     }
 }

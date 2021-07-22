@@ -4,6 +4,8 @@ ucf/assignments/InventoryItem.java
  ucf.assignments.InventoryItem
 ucf/assignments/ExportItemController.java
  ucf.assignments.ExportItemController
+ucf/assignments/ErrorMessageController.java
+ ucf.assignments.ErrorMessageController
 ucf/assignments/InventoryController.java
  ucf.assignments.InventoryController
 ucf/assignments/ImportItemController.java

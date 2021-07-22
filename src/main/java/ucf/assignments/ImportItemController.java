@@ -86,14 +86,15 @@ public class ImportItemController {
     public boolean ItemSerialExistsWhenImporting(String serial, ObservableList<InventoryItem> dataList){
         // return true if serial does not exist
         if (dataList.size() == 0){
-            System.out.println("table is empty");
+            // table is empty so serial number does not exist so return true
             return true;
         }
         else {
             for (InventoryItem holder : dataList) {
                 if (holder.getItemSerialNumber().equals(serial.toUpperCase())) {
-                    System.out.println("Serial number already exists in table");
-                    //showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
+                    ErrorMessageController App = new ErrorMessageController();
+                    //Shows error if serial number already exists and returns false
+                    App.showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
                     return false;
                 }
             }
@@ -102,6 +103,8 @@ public class ImportItemController {
     }
 
     private String removeLastCharacter(String fileData){
+        // if last character of string is a comma, remove it.
+        // used when importing JSON files
         if (fileData.charAt(fileData.length()-1) == ','){
             fileData = fileData.substring(0, fileData.length()-1);
         }
