@@ -22,17 +22,15 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class InventoryController implements Initializable {
 
     @FXML
-    private TextField ItemSearch;
+    public TextField ItemSearch;
 
     @FXML
     private TextField ItemName;
@@ -44,7 +42,7 @@ public class InventoryController implements Initializable {
     private TextField ItemValue;
 
     @FXML
-    private TableView<InventoryItem> myToDoTable;
+    public TableView<InventoryItem> myToDoTable;
 
     @FXML
     private TableColumn<InventoryItem, String> InventoryItemSerialNumberColumn;
@@ -56,10 +54,11 @@ public class InventoryController implements Initializable {
     private TableColumn<InventoryItem, String> InventoryItemValueColumn;
 
     @FXML
-    private final FileChooser fileChooser = new FileChooser();
+    public final FileChooser fileChooser = new FileChooser();
 
     @FXML
     public void ImportFileButtonClicked(ActionEvent actionEvent) throws FileNotFoundException {
+        //ImportFileController app = new ImportFileController();
         OpenFileChooserImport();
     }
 
@@ -85,7 +84,7 @@ public class InventoryController implements Initializable {
         modifyItemInformation();
     }
 
-    private final ObservableList<InventoryItem> dataList = FXCollections.observableArrayList();
+    public ObservableList<InventoryItem> dataList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -309,105 +308,8 @@ public class InventoryController implements Initializable {
         myToDoTable.sort();
     }
 
-    private String convertDataToTSV(){
-        StringBuilder data = new StringBuilder();
-        ObservableList<InventoryItem> list = myToDoTable.getItems();
-        for (InventoryItem item : list){
-            data.append(item.getItemValue()).append("\t")
-                    .append(item.getItemSerialNumber()).append("\t")
-                    .append(item.getItemName()).append("\n");
-        }
-        System.out.println(data);
-        return String.valueOf(data);
-    }
-
-    private void saveFileAsTSV(File file) throws FileNotFoundException {
-        // saves data to file
-        PrintWriter writer;
-        writer = new PrintWriter(file);
-        writer.println(convertDataToTSV());
-        writer.close();
-    }
-
-    private String convertDataToHTML(){
-        StringBuilder data = new StringBuilder("""
-                <html>
-                <style>
-                table, th, td {
-                  border: 1px solid black;
-                  border-collapse: collapse;
-                }
-                </style>
-                </head>
-                <body>
-                                
-                <table>
-                    <tr>
-                        <th>Value</th>
-                        <th>Serial Number</th>
-                        <th>Name</th>
-                    <tr>""");
-        ObservableList<InventoryItem> list = myToDoTable.getItems();
-        for (InventoryItem item: list){
-            data.append("\n\t").append("<tr>").append("\n\t\t").append("<th>")
-                    .append(item.getItemValue()).append("</th>").append("\n\t\t").append("<th>")
-                    .append(item.getItemSerialNumber()).append("</th>").append("\n\t\t").append("<th>")
-                    .append(item.getItemName()).append("</th>").append("\n\t").append("</tr>");
-        }
-        data.append("""
-                
-                </table>
-                                
-                </body>
-                </html>
-                """);
-        return data.toString();
-    }
-
-    private void saveFileAsHTML(File file) throws FileNotFoundException {
-        // saves data to file
-        System.out.println("now saving as html");
-        PrintWriter writer;
-        writer = new PrintWriter(file);
-        writer.println(convertDataToHTML());
-        writer.close();
-    }
-
-    private String convertDataToJSON(){
-        StringBuilder data = new StringBuilder("""
-                {
-                    "Inventory":[""");
-        ObservableList<InventoryItem> list = myToDoTable.getItems();
-        for (InventoryItem item: list){
-            if (item.getItemSerialNumber().equals(list.get(list.size() - 1).getItemSerialNumber()) || list.size() == 1){
-                data.append("\n\t\t").append("{")
-                        .append("\"Value\":\"").append(item.getItemValue()).append("\",")
-                        .append("\"SerialNumber\":\"").append(item.getItemSerialNumber()).append("\",")
-                        .append("\"Name\":\"").append(item.getItemName()).append("\"")
-                        .append("}\n"); // if item is last item in list or list size is only one, don't put a comma
-            }
-            else
-                data.append("\n\t\t").append("{")
-                        .append("\"Value\":\"").append(item.getItemValue()).append("\",")
-                        .append("\"SerialNumber\":\"").append(item.getItemSerialNumber()).append("\",")
-                        .append("\"Name\":\"").append(item.getItemName()).append("\"")
-                        .append("},"); // put a comma
-        }
-        data.append("""
-                    ]
-                }""");
-        return data.toString();
-    }
-
-    private void saveFileAsJSON(File file) throws FileNotFoundException {
-        // saves data to file
-        PrintWriter writer;
-        writer = new PrintWriter(file);
-        writer.println(convertDataToJSON());
-        writer.close();
-    }
-
     private void OpenFileChooserExport() throws FileNotFoundException {
+        ExportItemController App = new ExportItemController();
         // creates new window
         Window stage = ItemSearch.getScene().getWindow();
         // set window name
@@ -424,7 +326,10 @@ public class InventoryController implements Initializable {
         // checks if file exists
         if (file!=null){
             // calls function to save data to said file
-            saveDataToFile(file, getFileExtension(file));
+            //saveDataToFile(file, getFileExtension(file));
+            // gets items in table and add to list
+            ObservableList<InventoryItem> list = myToDoTable.getItems();
+            App.saveDataToFile(file, App.getFileExtension(file), list);
         }
     }
 
@@ -434,14 +339,6 @@ public class InventoryController implements Initializable {
         String[] array = filename.split("\\.");
         System.out.println(array[1]);
         return array[1];
-    }
-
-    private void saveDataToFile(File file, String filetype) throws FileNotFoundException {
-        switch (filetype) {
-            case "txt" -> saveFileAsTSV(file);
-            case "html" -> saveFileAsHTML(file);
-            case "json" -> saveFileAsJSON(file);
-        }
     }
 
     private void OpenFileChooserImport() throws FileNotFoundException {
@@ -534,7 +431,7 @@ public class InventoryController implements Initializable {
         return Double.parseDouble(item.getItemValue());
     }
 
-    private void showErrorMessageSerialNumberExists(String SN){
+    public void showErrorMessageSerialNumberExists(String SN){
         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
         String error = "Cannot add item. The serial number " + SN + " already exists.";
         errorAlert.setHeaderText("Error");

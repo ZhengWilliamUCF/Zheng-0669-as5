@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ucf.assignments.InventoryControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-07-21T23:29:23" hostname="DESKTOP-NKEJDJ2" time="0.027">
+<testsuite name="ucf.assignments.InventoryControllerTest" tests="25" skipped="0" failures="0" errors="0" timestamp="2021-07-22T00:12:25" hostname="DESKTOP-NKEJDJ2" time="0.326">
   <properties/>
-  <testcase name="importJSON()" classname="ucf.assignments.InventoryControllerTest" time="0.027"/>
+  <testcase name="SaveToTSV()" classname="ucf.assignments.InventoryControllerTest" time="0.205"/>
+  <testcase name="findItemViaNameTrue()" classname="ucf.assignments.InventoryControllerTest" time="0.003"/>
+  <testcase name="editValue()" classname="ucf.assignments.InventoryControllerTest" time="0.003"/>
+  <testcase name="SaveToHTML()" classname="ucf.assignments.InventoryControllerTest" time="0.003"/>
+  <testcase name="SaveToJSON()" classname="ucf.assignments.InventoryControllerTest" time="0.004"/>
+  <testcase name="AddDataToTableTest()" classname="ucf.assignments.InventoryControllerTest" time="0.007"/>
+  <testcase name="isItemNameValidMoreThan256()" classname="ucf.assignments.InventoryControllerTest" time="0.004"/>
+  <testcase name="editSerialNumber()" classname="ucf.assignments.InventoryControllerTest" time="0.003"/>
+  <testcase name="findItemViaSerialNumberTrue()" classname="ucf.assignments.InventoryControllerTest" time="0.002"/>
+  <testcase name="importTSV()" classname="ucf.assignments.InventoryControllerTest" time="0.002"/>
+  <testcase name="editSerialNumberSame()" classname="ucf.assignments.InventoryControllerTest" time="0.003"/>
+  <testcase name="isValueValidWithPositive()" classname="ucf.assignments.InventoryControllerTest" time="0.001"/>
+  <testcase name="isValueValidWithNegative()" classname="ucf.assignments.InventoryControllerTest" time="0.002"/>
+  <testcase name="isValueValidWithNull()" classname="ucf.assignments.InventoryControllerTest" time="0.002"/>
+  <testcase name="isValueValidWithZero()" classname="ucf.assignments.InventoryControllerTest" time="0.004"/>
+  <testcase name="isItemNameValidExact256()" classname="ucf.assignments.InventoryControllerTest" time="0.002"/>
+  <testcase name="isItemNameValidLessThan2()" classname="ucf.assignments.InventoryControllerTest" time="0.002"/>
+  <testcase name="isItemNameValidExact2()" classname="ucf.assignments.InventoryControllerTest" time="0.004"/>
+  <testcase name="findItemViaNameFalse()" classname="ucf.assignments.InventoryControllerTest" time="0.001"/>
+  <testcase name="editName()" classname="ucf.assignments.InventoryControllerTest" time="0.004"/>
+  <testcase name="canContain100Items()" classname="ucf.assignments.InventoryControllerTest" time="0.003"/>
+  <testcase name="findItemViaSerialNumberFalse()" classname="ucf.assignments.InventoryControllerTest" time="0.002"/>
+  <testcase name="removeItemFromList()" classname="ucf.assignments.InventoryControllerTest" time="0.001"/>
+  <testcase name="importHTML()" classname="ucf.assignments.InventoryControllerTest" time="0.002"/>
+  <testcase name="importJSON()" classname="ucf.assignments.InventoryControllerTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
