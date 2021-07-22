@@ -145,6 +145,11 @@ public class InventoryController implements Initializable {
         ItemIsUnselected();
     }
 
+    private void AddItemToTable2(){
+
+
+    }
+
     private boolean isItemNameValid(){
         // checks length of item name
         if (ItemName.getText().length() <= 256 && ItemName.getText().length() >= 2){
@@ -333,15 +338,8 @@ public class InventoryController implements Initializable {
         }
     }
 
-    private String getFileExtension(File file){
-        // gets the file extension and returns it
-        String filename = file.getName();
-        String[] array = filename.split("\\.");
-        System.out.println(array[1]);
-        return array[1];
-    }
-
     private void OpenFileChooserImport() throws FileNotFoundException {
+        ImportItemController App = new ImportItemController();
         // creates new window
         Window stage = ItemSearch.getScene().getWindow();
         // set window name
@@ -355,75 +353,7 @@ public class InventoryController implements Initializable {
         File file = fileChooser.showOpenDialog(stage);
         if (file!=null) {
             System.out.println("Start import!");
-            readDataFromFile(file, getFileExtension(file));
-        }
-    }
-
-    private void readDataFromFile(File file, String filetype) throws FileNotFoundException {
-        switch (filetype) {
-            case "txt" -> readFromTSV(file);
-            case "html" -> readFromHTML(file);
-            case "json" -> readFromJSON(file);
-        }
-    }
-
-    private void readFromTSV(File file) throws FileNotFoundException {
-        Scanner reader = new Scanner(file);
-        while (reader.hasNext()) {
-            String fileData = reader.nextLine();
-            // splits String data
-            String[] array = fileData.split("\t", 3);
-            // adds to TableView is imported item's serial number is not already in table
-            if (ItemSerialExistsWhenImporting(array[1]))
-                dataList.add(new InventoryItem(array[0], array[1], array[2]));
-        }
-    }
-
-    private void readFromHTML(File file) throws FileNotFoundException {
-        // counter for array
-        int counter = 0;
-        String[] array = new String[3];
-        Scanner reader = new Scanner(file);
-        while (reader.hasNext()) {
-            String fileData = reader.nextLine();
-            // cleans up line
-            if (fileData.contains("\t\t<th>")) {
-                fileData = fileData
-                        .replaceAll("<th>", "")
-                        .replaceAll("</th>", "")
-                        .replaceAll("\t", "");
-                array[counter] = fileData;
-                counter++;
-                // when counter reaches 3 reset to 0
-                if (counter == 3){
-                    counter = 0;
-                    // adds to TableView is imported item's serial number is not already in table
-                    if (ItemSerialExistsWhenImporting(array[1]))
-                        dataList.add(new InventoryItem(array[0], array[1], array[2]));
-                }
-            }
-        }
-    }
-
-    private void readFromJSON(File file) throws FileNotFoundException {
-        Scanner reader = new Scanner(file);
-        while (reader.hasNext()) {
-            String fileData = reader.nextLine();
-            // cleans up line
-            if (fileData.contains("Value")) {
-                fileData = fileData.replaceAll("[{}\t\"]", "");
-                fileData = fileData
-                        .replaceAll("Value:", "")
-                        .replace("SerialNumber:", "")
-                        .replace("Name:", "");
-                // removes last character if it is ","
-                fileData = removeLastCharacter(fileData);
-                // Splits clean string
-                String[] array = fileData.split(",", 3);
-                // adds to TableView is imported item's serial number is not already in table
-                if (ItemSerialExistsWhenImporting(array[1]))
-                    dataList.add(new InventoryItem(array[0], array[1], array[2]));
-            }
+            App.readDataFromFile(file, App.getFileExtension(file), dataList);
         }
     }
 
@@ -478,12 +408,5 @@ public class InventoryController implements Initializable {
         errorAlert.setHeaderText("Error");
         errorAlert.setContentText(error);
         errorAlert.showAndWait();
-    }
-
-    private String removeLastCharacter(String fileData){
-        if (fileData.charAt(fileData.length()-1) == ','){
-            fileData = fileData.substring(0, fileData.length()-1);
-        }
-        return fileData;
     }
 }
