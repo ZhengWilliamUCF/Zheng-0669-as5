@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Put functions related to import in another class for no apparent reason whatsoever.">
+    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Put functions related to error messages in another class for no apparent reason whatsoever.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ucf/assignments/ImportItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ucf/assignments/ImportItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ucf/assignments/InventoryControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ucf/assignments/InventoryControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,8 +54,8 @@
       <list>
         <option value="FxmlFile" />
         <option value="UML Sequence" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -427,7 +425,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626975978983</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Put functions related to error messages in another class for no apparent reason whatsoever.">
+      <created>1626976574960</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1626976574960</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -443,7 +448,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added functions to checking if serial number already exists" />
     <MESSAGE value="Added functions to remove existing inventory item" />
     <MESSAGE value="Added functions to modify item information" />
     <MESSAGE value="Added search function" />
@@ -468,6 +472,7 @@
     <MESSAGE value="Created tests for InventoryController" />
     <MESSAGE value="Put functions related to export in another class for no apparent reason whatsoever." />
     <MESSAGE value="Put functions related to import in another class for no apparent reason whatsoever." />
-    <option name="LAST_COMMIT_MESSAGE" value="Put functions related to import in another class for no apparent reason whatsoever." />
+    <MESSAGE value="Put functions related to error messages in another class for no apparent reason whatsoever." />
+    <option name="LAST_COMMIT_MESSAGE" value="Put functions related to error messages in another class for no apparent reason whatsoever." />
   </component>
 </project>
