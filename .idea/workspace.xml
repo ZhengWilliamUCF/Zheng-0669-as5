@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Put functions related to error messages in another class for no apparent reason whatsoever.">
+    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Moved unit tests to new .java files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ucf/assignments/InventoryControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ucf/assignments/InventoryControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ucf/assignments/Inventory.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ucf/assignments/Inventory.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uml/Program.puml" beforeDir="false" afterPath="$PROJECT_DIR$/uml/Program.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,10 +55,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
         <option value="UML Sequence" />
         <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -90,10 +93,17 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/ucf/assignments" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Rando\IdeaProjects\untitled27\src\main\resources\ucf\assignments" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Rando\IdeaProjects\untitled27\src\main\resources\soundfile" />
+      <recent name="C:\Users\Rando\IdeaProjects\untitled27\src\main\resources\design" />
+      <recent name="C:\Users\Rando\IdeaProjects\untitled27\src\main\resources\ucf\assignments" />
       <recent name="C:\Users\Rando\IdeaProjects\untitled27\src\main\java\ucf\assignments" />
       <recent name="C:\Users\Rando\IdeaProjects\untitled27" />
     </key>
@@ -432,7 +442,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626976574960</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Moved unit tests to new .java files">
+      <created>1626977049881</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1626977049881</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -448,7 +465,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added functions to remove existing inventory item" />
     <MESSAGE value="Added functions to modify item information" />
     <MESSAGE value="Added search function" />
     <MESSAGE value="Added search function and some commentd" />
@@ -473,6 +489,7 @@
     <MESSAGE value="Put functions related to export in another class for no apparent reason whatsoever." />
     <MESSAGE value="Put functions related to import in another class for no apparent reason whatsoever." />
     <MESSAGE value="Put functions related to error messages in another class for no apparent reason whatsoever." />
-    <option name="LAST_COMMIT_MESSAGE" value="Put functions related to error messages in another class for no apparent reason whatsoever." />
+    <MESSAGE value="Moved unit tests to new .java files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved unit tests to new .java files" />
   </component>
 </project>

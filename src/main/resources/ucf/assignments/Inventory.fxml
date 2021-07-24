@@ -32,5 +32,6 @@
     </TableView>
     <AnchorPane prefHeight="34.0" prefWidth="688.0">
         <Button layoutX="14.0" layoutY="4.0" mnemonicParsing="false" onAction="#DeleteItemButtonClicked" prefHeight="25.0" prefWidth="90.0" text="Delete Item" />
+      <Button layoutX="123.0" layoutY="4.0" mnemonicParsing="false" onAction="#DeleteAllButtonClicked" prefHeight="25.0" prefWidth="90.0" text="Delete All" />
     </AnchorPane>
 </SplitPane>

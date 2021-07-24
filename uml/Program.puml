@@ -36,6 +36,7 @@ class InventoryItemController{
     ExportFileButtonClicked()
     AddItemButtonClicked()
     DeleteItemButtonClicked()
+    DeleteAllButtonClicked()
     EditItemButtonClicked()
 
     dataList: ObservableList<InventoryItem>
@@ -51,13 +52,31 @@ class InventoryItemController{
     isItemValidWhenEditing()
     ItemSerialExists()
     ItemSerialExistsWhenEditing()
-    ItemSerialExistsWhenImporting(String serial)
+
     RemoveItem()
+    RemoveAll()
     modifyItemInformation()
     ItemIsSelected()
     ItemIsUnselected()
     SortByName()
 
+    OpenFileChooserExport()
+    OpenFileChooserImport()
+
+    getValue(InventoryItem item)
+}
+
+class ErrorMessageController{
+    showErrorMessageSerialNumberExists(String SN)
+    showErrorMessageSerialNumberLength()
+    showErrorMessageSerialNumberInvalid()
+    showErrorMessageBadValue()
+    showErrorMessageNullValue()
+    showErrorMessageInvalidNameLength()
+}
+
+class ExportItemController{
+    saveDataToFile(File file, String filetype)
     convertDataToTSV()
     saveFileAsTSV(File file)
 
@@ -67,31 +86,23 @@ class InventoryItemController{
     convertDataToJSON()
     saveFileAsJSON(File file)
 
-    OpenFileChooserExport()
     getFileExtension(File file)
-    saveDataToFile(File file, String filetype)
+}
 
-    OpenFileChooserImport()
+class ImportItemController{
     readDataFromFile(File file, String filetype)
-
+    removeLastCharacter(String fileData)
     readFromTSV(File file)
     readFromHTML(File file)
     readFromJSON(File file)
-
-    getValue(InventoryItem item)
-
-    showErrorMessageSerialNumberExists(String SN)
-    showErrorMessageSerialNumberLength()
-    showErrorMessageSerialNumberInvalid()
-    showErrorMessageBadValue()
-    showErrorMessageNullValue()
-    showErrorMessageInvalidNameLength()
-
-    removeLastCharacter(String fileData)
+    ItemSerialExistsWhenImporting(String serial)
 }
 
 javafx.InventoryController <-- MainProgram
 MainProgram --> InventoryItemController
 InventoryItem --> InventoryItemController
+InventoryItemController <--> ImportItemController
+InventoryItemController <--> ExportItemController
+InventoryItemController --> ErrorMessageController
 
 @enduml

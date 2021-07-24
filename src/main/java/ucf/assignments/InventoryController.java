@@ -19,8 +19,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import javax.sound.sampled.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
@@ -66,7 +68,8 @@ public class InventoryController implements Initializable {
     }
 
     @FXML
-    public void AddItemButtonClicked(ActionEvent actionEvent) {
+    public void AddItemButtonClicked(ActionEvent actionEvent) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        playButtonSound();
         if (isItemValid()){
             AddItemToTable();
         }
@@ -75,6 +78,12 @@ public class InventoryController implements Initializable {
     @FXML
     public void DeleteItemButtonClicked(ActionEvent actionEvent) {
         RemoveItem();
+    }
+
+    @FXML
+    public void DeleteAllButtonClicked(ActionEvent actionEvent) {
+        // clears entire list
+        RemoveAll();
     }
 
     @FXML
@@ -262,6 +271,10 @@ public class InventoryController implements Initializable {
             dataList.remove(selected);
     }
 
+    private void RemoveAll(){
+        dataList.clear();
+    }
+
     private void modifyItemInformation(){
         if (isItemValidWhenEditing()) {
             myToDoTable.getSelectionModel().getSelectedItem().setItemValue((ItemValue.getText()));
@@ -336,5 +349,13 @@ public class InventoryController implements Initializable {
 
     private double getValue(InventoryItem item){
         return Double.parseDouble(item.getItemValue());
+    }
+
+    private void playButtonSound() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+        File file = new File("src/main/resources/soundfile/LevelUp.wav");
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioStream);
+        clip.start();
     }
 }
