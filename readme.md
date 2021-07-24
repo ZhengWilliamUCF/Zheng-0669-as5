@@ -25,6 +25,8 @@ in the bottom right corner of the application.
 ## Searching for items
 You can search for items by entering an input in the "search item" TextField. The corresponding items that match will be dynamically updated via TableView.
 > Note: Items can be searched via their Serial Numbers or Names.
+## Sorting Items
+You can sort items by clicking on the column name of each column in the TableView. Clicking on it once sorts descending values. Clicking once more sort by Ascending values. Clicking it one more time will reset to no sorting.
 ## Editing an item
 > Note: An item must be selected before you can edit an item.
 ---
