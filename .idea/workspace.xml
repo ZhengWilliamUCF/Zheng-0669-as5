@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Added sound effect for adding item, updated uml, added deleteAll button">
+    <list default="true" id="20310d2b-de62-4e27-8586-e18f5dea7442" name="Default Changelist" comment="Updated readme.md for how to sort">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ucf/assignments/InventoryController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -460,7 +460,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627102295953</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Updated readme.md for how to sort">
+      <created>1627102705091</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1627102705091</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -476,7 +483,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added search function" />
     <MESSAGE value="Added search function and some commentd" />
     <MESSAGE value="Added filechooser functions for import and export" />
     <MESSAGE value="Finished functions for exporting TSV" />
@@ -501,6 +507,7 @@
     <MESSAGE value="Put functions related to error messages in another class for no apparent reason whatsoever." />
     <MESSAGE value="Moved unit tests to new .java files" />
     <MESSAGE value="Added sound effect for adding item, updated uml, added deleteAll button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added sound effect for adding item, updated uml, added deleteAll button" />
+    <MESSAGE value="Updated readme.md for how to sort" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated readme.md for how to sort" />
   </component>
 </project>

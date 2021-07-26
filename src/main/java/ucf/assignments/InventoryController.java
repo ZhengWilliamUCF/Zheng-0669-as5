@@ -56,6 +56,8 @@ public class InventoryController implements Initializable {
     @FXML
     public final FileChooser fileChooser = new FileChooser();
 
+    int counter = 0;
+
     @FXML
     public void ImportFileButtonClicked(ActionEvent actionEvent) throws FileNotFoundException {
         //ImportFileController app = new ImportFileController();
@@ -246,6 +248,7 @@ public class InventoryController implements Initializable {
     }
 
     private boolean ItemSerialExistsWhenEditing(){
+        int selected = myToDoTable.getSelectionModel().getSelectedIndex();
         // return true if serial does not exist
         if (myToDoTable.getItems().size() == 0){
             return true;
@@ -253,9 +256,10 @@ public class InventoryController implements Initializable {
         else {
             for (int i = 0; i < myToDoTable.getItems().size(); i++){
                 InventoryItem holder = myToDoTable.getItems().get(i);
-                if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText().toUpperCase())){
+                if (holder.getItemSerialNumber().equals(ItemSerialNumber.getText().toUpperCase()) && selected != i){
                     ErrorMessageController App = new ErrorMessageController();
                     App.showErrorMessageSerialNumberExists(holder.getItemSerialNumber());
+                    counter = 0;
                     return false;
                 }
             }
